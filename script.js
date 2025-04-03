@@ -27,15 +27,18 @@ document.addEventListener('DOMContentLoaded', function() {
         "바이탈리티 리추얼💚\n\nPOWER UP THE SKIN\n\n생기 있고 건강한 피부를 위한 바이탈리티 리추얼.\n건강함, 화사함, 싱그러움, 촉촉함, 풍만함, 차오름으로 피로의 흔적, 시간의 흔적을 지워보세요.\n\nHP DNA: 40년 피부 'REVENERATION 재생'을 위해 사용되어 온 발몽을 대표하는 성분\nSILANOL: 15년 이상의 피부 'RESTRUCTURING 재구조'를 위해 활용된 발몽의 대표 성분\n\nHP DNA + SILANOL = Si DNA : Cell Booster\n-ATP 보호: 세포 에너지\n-세포 증식: 젊은 세포 증가\n-항산화: 세포 보호\n-디톡스: 자가포식\n-세포 커뮤니케이션: 세포 교환 촉진");
 });
 
-// 콘텐츠 설정 함수
+// 콘텐츠 설정 함수 - innerHTML 사용으로 개선
 function setupContent(imageId, textId, imageUrl, textContent) {
     document.getElementById(imageId).style.backgroundImage = `url('${imageUrl}')`;
-    document.getElementById(textId).textContent = textContent;
+    
+    // 줄바꿈을 <br> 태그로 변환하여 HTML로 삽입
+    const formattedText = textContent.replace(/\n/g, '<br>');
+    document.getElementById(textId).innerHTML = formattedText;
 }
 
 // 텍스트 복사 함수
 function copyText(elementId) {
-    const text = document.getElementById(elementId).textContent;
+    const text = document.getElementById(elementId).innerText; // innerHTML 대신 innerText 사용
     navigator.clipboard.writeText(text)
         .then(() => {
             alert('텍스트가 클립보드에 복사되었습니다!');
